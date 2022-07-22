@@ -1,9 +1,16 @@
 // accessing the chart form element from chat.html
 const chatForm = document.getElementById('chat-form');
 
+//get username and room from url
+
+const{ username, room} = Qs.parse(location.search, {
+    ignoreQueryPrefix: true
+});
 // accessing the chat messages from chat.html
 const chatMessges = document.querySelector('.chat-messages')
 const socket = io();
+//join chatroom sending message to server
+socket.emit('joinRoom', {username, room})
 // message from server
 socket.on('message', message=>{
     console.log(message)
